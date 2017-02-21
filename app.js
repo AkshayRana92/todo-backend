@@ -86,6 +86,8 @@ app.post('/update', function(req, res){
             description: req.body.description,
             priority: req.body.priority
         };
+
+
         Todo.updateById(req.body._id, obj, function(err, todo){
             if(err) {
                 throw err

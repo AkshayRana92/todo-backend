@@ -23,5 +23,6 @@ module.exports.addTodo = function(todo, callback){
 
 module.exports.updateById = function(id, obj, callback){
     //Todo.create(id, todo, callback)
-    Todo.update({_id: id}, obj);
+
+    Todo.findByIdAndUpdate(id, { $set: obj}, { new: true }, callback);
 };
