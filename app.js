@@ -38,7 +38,7 @@ var db = mongoose.connection;
 app.get('/get/all', function(req, res){
     Todo.getTodoList(function(err, todoList){
         if(err) {
-            throw err
+            res.status(400).send(err)
         }
         res.json(todoList)
     });
@@ -46,14 +46,12 @@ app.get('/get/all', function(req, res){
 
 app.get('/remove/:id', function(req, res){
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        Todo.removeById(req.params.id, function(err, todo){
-        if(err) {
-            throw err
-        }
-        res.json(todo)
-    })
-    } else {
-        res.send({'message':'Invalid ID'})
+        Todo.find({ id:333 }).remove().exec().catch(function(err){
+            res.status(400).send({'message':'Invalid ID'})
+        });
+    }
+    else {
+        res.status(400).send({'message':'Invalid ID'})
     }
 });
 
@@ -92,7 +90,7 @@ app.post('/update', function(req, res){
             res.json(todo)
         })
     } else {
-        res.send({'message':'Invalid data'})
+        res.status(400).send({'message':'Invalid data'})
     }
 });
 

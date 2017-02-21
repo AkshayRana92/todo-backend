@@ -14,7 +14,7 @@ module.exports.getTodoList = function(callback){
 };
 
 module.exports.removeById = function(id, callback){
-    Todo.findByIdAndRemove(id, callback)
+    Todo.find({ id:333 }).remove().exec();
 };
 
 module.exports.addTodo = function(todo, callback){
