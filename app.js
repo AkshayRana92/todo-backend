@@ -46,7 +46,7 @@ app.get('/get/all', function(req, res){
 
 app.get('/remove/:id', function(req, res){
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        Todo.find({ id:333 }).remove().exec().catch(function(err){
+        Todo.find({ id: req.params.id}).remove().exec().catch(function(err){
             res.status(400).send({'message':'Invalid ID'})
         });
     }
